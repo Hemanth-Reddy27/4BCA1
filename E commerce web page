@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-commerce Webpage</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>E-commerce Webpage</h1>
+
+  <form id="orderForm" onsubmit="validateForm(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br>
+    <label for="mobile">Mobile:</label>
+    <input type="text" id="mobile" required>
+    <br>
+    <label for="address">Address:</label>
+    <input type="text" id="address" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <br>
+
+    <h2>Category: House Appliances</h2>
+    <input type="checkbox" name="appliance" value="Toaster">Toaster<br>
+    <input type="checkbox" name="appliance" value="Blender">Blender<br>
+    <input type="checkbox" name="appliance" value="Microwave">Microwave<br>
+
+    <h2>Category: Electronics</h2>
+    <input type="checkbox" name="electronics" value="Laptop">Laptop<br>
+    <input type="checkbox" name="electronics" value="Smartphone">Smartphone<br>
+    <input type="checkbox" name="electronics" value="Camera">Camera<br>
+
+    <button type="submit">Add to Cart</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+function validateForm(event) {
+  event.preventDefault();
+
+  var name = document.getElementById("name").value;
+  var mobile = document.getElementById("mobile").value;
+  var address = document.getElementById("address").value;
+  var email = document.getElementById("email").value;
+  var appliances = document.getElementsByName("appliance");
+  var electronics = document.getElementsByName("electronics");
+
+  var applianceCount = countSelectedItems(appliances);
+  var electronicsCount = countSelectedItems(electronics);
+
+  if (name.trim() === "" || mobile.trim() === "" || address.trim() === "" || email.trim() === "") {
+    alert("Please fill in all fields.");
+  } else if (applianceCount > 3 || electronicsCount > 3) {
+    alert("Maximum 3 items are allowed per category.");
+  } else {
+    // Form is valid, proceed with adding items to the cart or submitting the order.
+    // You can implement your desired logic here.
+    console.log("Form submitted successfully!");
+  }
+}
+
+function countSelectedItems(items) {
+  var count = 0;
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].checked) {
+      count++;
+    }
+  }
+  return count;
+}
